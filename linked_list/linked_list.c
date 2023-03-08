@@ -220,20 +220,79 @@ void clear_list(p_linked_list_t list)
 
 void delete_first_match(p_linked_list_t list, int data)
 {
-    //TODO
+    if(!list_is_valid(list) || list->size == 0)
+    {
+        return;
+    }
+
+    //remove head
+    if(list->head->data == data)
+    {
+        remove_front(list);
+        return;
+    }
+
+    p_node_t curr = list->head->next;
+    p_node_t prev = list->head;
+
+    while (curr)
+    {
+        if(curr->data == data)
+        {
+            if(curr == list->tail)
+            {
+                remove_behind(list);
+            }
+            else{
+                prev->next = curr->next;
+                delete_node(curr);
+                list->size--;
+            }
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
 }
 
 void delete_all_matches(p_linked_list_t list, int data)
 {
-    //TODO
+    if(!list_is_valid(list) || list->size == 0)
+    {
+        return;
+    }
+
+    p_node_t curr = list->head->next;
+    p_node_t prev = list->head;
+
+    while (curr)
+    {
+        if(curr->data == data)
+        {
+            prev->next = curr->next;
+            delete_node(curr);
+            curr = prev->next;
+
+            //element was tail
+            if(curr == 0)
+            {
+                list->tail = prev;
+            }
+            list->size--;
+        }
+        else
+        {
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+    if(list->head->data == data)
+    {
+        remove_front(list);
+    }
 }
 
 int pop_head(p_linked_list_t list)
-{
-    //TODO
-    return 0;
-}
-int peek_head(p_linked_list_t list)
 {
     //TODO
     return 0;

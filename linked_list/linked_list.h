@@ -30,7 +30,6 @@ void delete_first_match(p_linked_list_t list, int data);
 void delete_all_matches(p_linked_list_t list, int data);
 
 int pop_head(p_linked_list_t list);
-int peek_head(p_linked_list_t list);
 
 int get_first(p_linked_list_t list);
 int get_last(p_linked_list_t list);
