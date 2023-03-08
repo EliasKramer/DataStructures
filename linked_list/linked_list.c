@@ -32,6 +32,11 @@ static void delete_node(p_node_t node)
     free(node);
 }
 
+static int list_can_be_iterated(p_linked_list_t list)
+{
+    return list_is_valid(list) && list->size > 0;
+}
+
 
 p_linked_list_t create_linked_list()
 {
@@ -147,7 +152,7 @@ void add_behind(p_linked_list_t list, int data)
 
 void remove_front(p_linked_list_t list)
 {
-    if(!list_is_valid(list) || list->size == 0)
+    if(!list_can_be_iterated(list))
     {
         return;
     }
@@ -167,7 +172,7 @@ void remove_front(p_linked_list_t list)
 
 void remove_behind(p_linked_list_t list)
 {
-    if(!list_is_valid(list) || list->size == 0)
+    if(!list_can_be_iterated(list))
     {
         return;
     }
@@ -200,7 +205,7 @@ void remove_behind(p_linked_list_t list)
 
 void clear_list(p_linked_list_t list)
 {
-    if(!list_is_valid(list) || list->size == 0)
+    if(!list_can_be_iterated(list))
     {
         return;
     }
@@ -220,7 +225,7 @@ void clear_list(p_linked_list_t list)
 
 void delete_first_match(p_linked_list_t list, int data)
 {
-    if(!list_is_valid(list) || list->size == 0)
+    if(!list_can_be_iterated(list))
     {
         return;
     }
@@ -257,7 +262,7 @@ void delete_first_match(p_linked_list_t list, int data)
 
 void delete_all_matches(p_linked_list_t list, int data)
 {
-    if(!list_is_valid(list) || list->size == 0)
+    if(!list_can_be_iterated(list))
     {
         return;
     }
@@ -294,26 +299,28 @@ void delete_all_matches(p_linked_list_t list, int data)
 
 int pop_head(p_linked_list_t list)
 {
-    if(!list_is_valid(list) || list->size == 0)
-    {
-        return 0;
-    }
-
-    int return_value = list->head->data;
+    int return_value = get_first(list);
     remove_front(list);
-
     return return_value;
 }
 
 int get_first(p_linked_list_t list)
 {
-    //TODO
-    return 0;
+    if(!list_can_be_iterated(list))
+    {
+        return 0;
+    }
+
+    return list->head->data;
 }
 int get_last(p_linked_list_t list)
 {
-    //TODO
-    return 0;
+    if(!list_can_be_iterated(list))
+    {
+        return 0;
+    }
+
+    return list->tail->data;
 }
 
 int get_at_idx(p_linked_list_t list, int idx)

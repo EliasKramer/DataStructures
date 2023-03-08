@@ -5,7 +5,8 @@ int main(int argc, char const *argv[])
 {
     p_linked_list_t ll = create_linked_list();
     
-    printf("\nadding front and back");
+    printf("\n");
+    printf("adding front and back");
     add_front(ll, 4);
     add_front(ll, 3);
     add_behind(ll, 5);
@@ -13,19 +14,23 @@ int main(int argc, char const *argv[])
     add_front(ll, 1);
     print_list(ll);
 
-    printf("\nremove front");
+    printf("\n");
+    printf("remove front");
     remove_front(ll);
     print_list(ll);
 
-    printf("\nremove behind");
+    printf("\n");
+    printf("remove behind");
     remove_behind(ll);
     print_list(ll);
 
-    printf("\nclear list");
+    printf("\n");
+    printf("clear list");
     clear_list(ll);
     print_list(ll);
 
-    printf("\nadd new elements");
+    printf("\n");
+    printf("add new elements");
     add_behind(ll, 11);
     add_behind(ll, 12);
     add_behind(ll, 13);
@@ -33,30 +38,56 @@ int main(int argc, char const *argv[])
     add_behind(ll, 15);
     print_list(ll);
 
-    printf("\nremove first 11");
+    printf("\n");
+    printf("remove first 11");
     delete_first_match(ll, 11);
     print_list(ll);
 
-    printf("\nremove first 13");
+    printf("\n");
+    printf("remove first 13");
     delete_first_match(ll, 13);
     print_list(ll);
     
-    printf("\nremove first 15");
+    printf("\n");
+    printf("remove first 15");
     delete_first_match(ll, 15);
     print_list(ll);
 
-    printf("\nadd new data");
+    printf("\n");
+    printf("add new data");
     add_behind(ll, 13);
     add_behind(ll, 11);
     add_behind(ll, 13);
     add_front(ll, 13);
     print_list(ll);
     
-    printf("\ndelete all 13");
+    printf("\n");
+    printf("delete all 13");
     delete_all_matches(ll, 13);
     print_list(ll);
 
-    
+    printf("\n");
+    printf("pop head");
+    int value = pop_head(ll);
+    printf("\n");
+    printf("ret val: %d", value);
+    print_list(ll);
+
+    //get first
+    printf("\n");
+    printf("get first");
+    value = get_first(ll);
+    printf("\n");
+    printf("ret val: %d", value);
+    print_list(ll);
+
+    //get last
+    printf("\n");
+    printf("get last");
+    value = get_last(ll);
+    printf("\n");
+    printf("ret val: %d", value);
+    print_list(ll);       
 
     return 0;
 }
