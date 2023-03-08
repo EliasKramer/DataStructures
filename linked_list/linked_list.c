@@ -325,11 +325,43 @@ int get_last(p_linked_list_t list)
 
 int get_at_idx(p_linked_list_t list, int idx)
 {
-    //TODO
-    return 0;
+    if(!list_can_be_iterated(list) || idx < 0 || idx >= list->size)
+    {
+        return 0;
+    }
+
+    p_node_t curr = list->head;
+    for(int i = 0; i < idx; i++)
+    {
+        curr = curr->next;
+    }
+
+    return curr->data;
+}
+
+static p_node_t recursive_reverse(p_node_t curr, p_linked_list_t list)
+{
+    if(curr->next == 0)
+    {
+        curr->next = list->head;
+        list->head = curr;
+    }
+    else
+    {
+        p_node_t prev = recursive_reverse(curr->next, list);
+        curr->next = prev->next;
+        prev->next = curr;
+    }
+    return curr; 
 }
 
 void reverse(p_linked_list_t list)
 {
-    //TODO
+    if(!list_is_valid(list) || list->size < 2)
+    {
+        return 0;
+    }
+
+    list->tail = recursive_reverse(list->head, list);
+    list->tail->next = 0;
 }

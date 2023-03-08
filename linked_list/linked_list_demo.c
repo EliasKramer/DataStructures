@@ -73,7 +73,6 @@ int main(int argc, char const *argv[])
     printf("ret val: %d", value);
     print_list(ll);
 
-    //get first
     printf("\n");
     printf("get first");
     value = get_first(ll);
@@ -81,13 +80,29 @@ int main(int argc, char const *argv[])
     printf("ret val: %d", value);
     print_list(ll);
 
-    //get last
     printf("\n");
     printf("get last");
     value = get_last(ll);
     printf("\n");
     printf("ret val: %d", value);
-    print_list(ll);       
+    print_list(ll);
+
+    printf("\n");
+    printf("add new data");
+    add_behind(ll, 13);
+    add_behind(ll, 11);
+
+    printf("\n");
+    printf("get at idx 2");
+    value = get_at_idx(ll, 2);
+    printf("\n");
+    printf("ret val: %d", value);
+    print_list(ll);
+
+    printf("\n");
+    printf("reverse");
+    reverse(ll);
+    print_list(ll);
 
     return 0;
 }
