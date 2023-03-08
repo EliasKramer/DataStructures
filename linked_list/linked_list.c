@@ -1,21 +1,17 @@
 #include "linked_list.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 static int list_is_valid(p_linked_list_t list)
 {
     return list != 0 && list->size >= 0;
 }
 
-static int node_is_valid(p_node_t node)
-{
-    return node != 0;
-}
-
 static p_node_t create_node(int data)
 {
     p_node_t node = malloc(sizeof(struct _node_t));
 
-    if(!node_is_valid(node))
+    if(node == 0)
     {
         return 0;
     }
@@ -25,6 +21,17 @@ static p_node_t create_node(int data)
 
     return node;
 }
+
+static void delete_node(p_node_t node)
+{
+    if(node == 0)
+    {
+        return;
+    }
+
+    free(node);
+}
+
 
 p_linked_list_t create_linked_list()
 {
@@ -43,12 +50,66 @@ p_linked_list_t create_linked_list()
 }
 void delete_linked_list(p_linked_list_t list)
 {
-    //TODO
+    clear(list);
+    free(list);
+}
+
+int get_size(p_linked_list_t list)
+{
+    if(!list_is_valid(list))
+    {
+        return 0;
+    }
+    return list->size;
+}
+
+void print_list(p_linked_list_t list)
+{
+    if(!list_is_valid(list))
+    {
+        return;
+    }
+
+    p_node_t current = list->head;
+
+    printf("\nList (size: %d): ", list->size);
+    while(current)
+    {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
 }
 
 void add_front(p_linked_list_t list, int data)
 {
-    //TODO
+    if(!list_is_valid(list))
+    {
+        return;
+    }
+
+    p_node_t node = create_node(data);
+
+    //node could not be created
+    if(node == 0)
+    {
+        return;
+    }
+
+    if(list->tail == 0)
+    {
+        list->tail = node;
+    }
+
+    //if the head exists, copy the head to the node next pointer
+    if(list->head != 0)
+    {
+        node->next = list->head;
+    }
+
+    list->head = node;
+
+    list->size++;
 }
 
 void add_behind(p_linked_list_t list, int data)
@@ -58,36 +119,83 @@ void add_behind(p_linked_list_t list, int data)
         return;
     }
 
-    p_node_t added_node = create_node(data);
+    p_node_t node = create_node(data);
 
-    if(!node_is_valid(added_node))
+    //node could not be created
+    if(node == 0)
     {
         return;
     }
 
     if(list->head == 0)
     {
-        list->head = added_node;
+        list->head = node;
     }
 
     if(list->tail == 0)
     {
-        list->tail = added_node;
+        list->tail = node;
     }
     else
     {
-        list->tail->next = added_node;
+        list->tail->next = node;
+        list->tail = node;
     }
+
+    list->size++;
 }
 
-void delete_front(p_linked_list_t list)
+void remove_front(p_linked_list_t list)
 {
-    //TODO
+    if(!list_is_valid(list) || list->size == 0)
+    {
+        return;
+    }
+
+    p_node_t node_to_delete = list->head;
+    
+    //if the element is the last in the list
+    if(list->head == list->tail)
+    {
+        list->tail = 0;
+    }
+    list->head = list->head->next;
+
+    delete_node(node_to_delete);
+    list->size--;
 }
 
-void delete_behind(p_linked_list_t list)
+void remove_behind(p_linked_list_t list)
 {
-    //TODO
+    if(!list_is_valid(list) || list->size == 0)
+    {
+        return;
+    }
+
+    p_node_t node_to_delete = list->tail;
+    
+    //if the element is the last in the list
+    if(list->head == list->tail)
+    {
+        list->head = 0;
+        list->tail = 0;
+    }
+    else
+    {
+        //iterate over the list until the element before the tail
+        p_node_t current = list->head;
+        while(current->next != list->tail)
+        {
+            current = current->next;
+        }
+        //remove the reference to the tail
+        current->next = 0;
+        //set new tail
+        list->tail = current;
+    }
+
+    delete_node(node_to_delete);
+    list->size--;
 }
 
 void clear(p_linked_list_t list)

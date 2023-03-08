@@ -5,9 +5,18 @@ int main(int argc, char const *argv[])
 {
     p_linked_list_t ll = create_linked_list();
     
+    add_front(ll, 4);
+    add_front(ll, 3);
     add_behind(ll, 5);
+    add_front(ll, 2);
+    add_front(ll, 1);
+    print_list(ll);
 
-    printf("first %d\n", ll->head->data);
+    remove_front(ll);
+    print_list(ll);
+
+    remove_behind(ll);
+    print_list(ll);
 
     return 0;
 }

@@ -15,11 +15,14 @@ typedef struct _linked_list_t {
 p_linked_list_t create_linked_list();
 void delete_linked_list(p_linked_list_t list);
 
+int get_size(p_linked_list_t list);
+void print_list(p_linked_list_t list);
+
 void add_front(p_linked_list_t list, int data);
 void add_behind(p_linked_list_t list, int data);
 
-void delete_front(p_linked_list_t list);
-void delete_behind(p_linked_list_t list);
+void remove_front(p_linked_list_t list);
+void remove_behind(p_linked_list_t list);
 
 void clear(p_linked_list_t list);
 
