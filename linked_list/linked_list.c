@@ -294,8 +294,15 @@ void delete_all_matches(p_linked_list_t list, int data)
 
 int pop_head(p_linked_list_t list)
 {
-    //TODO
-    return 0;
+    if(!list_is_valid(list) || list->size == 0)
+    {
+        return 0;
+    }
+
+    int return_value = list->head->data;
+    remove_front(list);
+
+    return return_value;
 }
 
 int get_first(p_linked_list_t list)
