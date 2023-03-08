@@ -343,6 +343,8 @@ static p_node_t recursive_reverse(p_node_t curr, p_linked_list_t list)
 {
     if(curr->next == 0)
     {
+        //reached current tail
+        //sets current tails as head
         curr->next = list->head;
         list->head = curr;
     }
@@ -363,5 +365,6 @@ void reverse(p_linked_list_t list)
     }
 
     list->tail = recursive_reverse(list->head, list);
+    //very important to avoid a looped linked list
     list->tail->next = 0;
 }
