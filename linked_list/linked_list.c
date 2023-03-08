@@ -50,7 +50,7 @@ p_linked_list_t create_linked_list()
 }
 void delete_linked_list(p_linked_list_t list)
 {
-    clear(list);
+    clear_list(list);
     free(list);
 }
 
@@ -198,9 +198,24 @@ void remove_behind(p_linked_list_t list)
     list->size--;
 }
 
-void clear(p_linked_list_t list)
+void clear_list(p_linked_list_t list)
 {
-    //TODO
+    if(!list_is_valid(list) || list->size == 0)
+    {
+        return;
+    }
+
+    p_node_t curr = list->head;
+    while(curr)
+    {
+        p_node_t node_to_delete = curr;
+        curr = curr->next;
+        delete_node(node_to_delete);
+    }
+
+    list->head = 0;
+    list->tail = 0;
+    list->size = 0;
 }
 
 void delete_first_match(p_linked_list_t list, int data)

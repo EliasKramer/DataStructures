@@ -18,6 +18,16 @@ int main(int argc, char const *argv[])
     remove_behind(ll);
     print_list(ll);
 
+    clear_list(ll);
+    print_list(ll);
+
+    add_behind(ll, 11);
+    add_behind(ll, 12);
+    add_behind(ll, 13);
+    add_behind(ll, 14);
+    
+    print_list(ll);
+
     return 0;
 }
 

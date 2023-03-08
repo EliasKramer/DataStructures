@@ -24,7 +24,7 @@ void add_behind(p_linked_list_t list, int data);
 void remove_front(p_linked_list_t list);
 void remove_behind(p_linked_list_t list);
 
-void clear(p_linked_list_t list);
+void clear_list(p_linked_list_t list);
 
 void delete_first_match(p_linked_list_t list, int data);
 void delete_all_matches(p_linked_list_t list, int data);
